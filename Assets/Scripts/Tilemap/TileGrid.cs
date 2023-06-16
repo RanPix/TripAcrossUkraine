@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -19,17 +20,22 @@ namespace TileMap
             if (instance == null)
                 instance = this;
             else
-                Debug.LogError("TILEGRID INSTANCE ALREADY EXISTS");
-        }
-
-        private void Start()
-        {
+                Debug.LogError("TILE GRID INSTANCE ALREADY EXISTS");
+            
             tiles = new Tile[gridSize.x, gridSize.y];
         }
 
+        /*private void Start()
+        {
+            foreach (var VARIABLE in tiles)
+            {
+                print(VARIABLE);
+            }
+        }*/
+
         private void Update()
         {
-            print(GetTileXY(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
+            //print(GetTileXY(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
         }
 
         public Tile[,] GetTiles() => tiles;
@@ -134,6 +140,19 @@ namespace TileMap
 
             spawnTile.Position = GetTileWorldPos(gridSpawnPosition);
             tiles[gridSpawnPosition.x, gridSpawnPosition.y] = spawnTile;
+        }
+
+        public Tile GetFirstRoadTile()
+        {
+            foreach (var tile in tiles)
+            {
+                if(!tile)
+                    continue;
+                //print(tile);
+                if(tile.type == TileType.Road) return tile;
+            }
+
+            return null;
         }
     }
 }
