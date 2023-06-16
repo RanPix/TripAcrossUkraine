@@ -6,7 +6,8 @@ namespace TileMap
     {
         [field: SerializeField] public TileType type { get; private set; }
         //[SerializeField] private Structure _structure;
-        public Vector2Int gridPosition;
+        [HideInInspector] public Vector2Int gridPosition;
+
         public Vector2 Position
         {
             get
