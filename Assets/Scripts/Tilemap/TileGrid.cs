@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -19,17 +20,22 @@ namespace TileMap
             if (instance == null)
                 instance = this;
             else
-                Debug.LogError("TILEGRID INSTANCE ALREADY EXISTS");
-        }
-
-        private void Start()
-        {
+                Debug.LogError("TILE GRID INSTANCE ALREADY EXISTS");
+            
             tiles = new Tile[gridSize.x, gridSize.y];
         }
 
+        /*private void Start()
+        {
+            foreach (var VARIABLE in tiles)
+            {
+                print(VARIABLE);
+            }
+        }*/
+
         private void Update()
         {
-            print(GetTileXY(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
+            //print(GetTileXY(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
         }
 
         public Tile[,] GetTiles() => tiles;
@@ -43,18 +49,18 @@ namespace TileMap
         public Tile[] GetNeumannNeighbourTiles(Tile tile)
         {
             List<Tile> neighburs = new();
-            
+
             if(tile.gridPosition.x > 0) // (-1, 0)
-                neighburs[0] = tiles[tile.gridPosition.x - 1, tile.gridPosition.y];
+                neighburs.Add(tiles[tile.gridPosition.x - 1, tile.gridPosition.y]);
 
             if(tile.gridPosition.x < gridSize.x - 1) // (1, 0)
-                neighburs[1] = tiles[tile.gridPosition.x + 1, tile.gridPosition.y];
+                neighburs.Add(tiles[tile.gridPosition.x + 1, tile.gridPosition.y]);
 
             if(tile.gridPosition.y > 0) // (0, -1)
-                neighburs[2] = tiles[tile.gridPosition.x, tile.gridPosition.y - 1];
+                neighburs.Add(tiles[tile.gridPosition.x, tile.gridPosition.y - 1]);
 
             if(tile.gridPosition.y < gridSize.y - 1) // (0, 1)
-                neighburs[3] = tiles[tile.gridPosition.x, tile.gridPosition.y + 1];
+                neighburs.Add(tiles[tile.gridPosition.x, tile.gridPosition.y + 1]);
 
             return neighburs.ToArray();
         }
@@ -114,7 +120,7 @@ namespace TileMap
 
         public Vector2 GetTileWorldPos(Vector2 tilePos)
         {
-            return tilePos - origin;
+            return tilePos + origin + new Vector2(tileSize, tileSize) * 0.5f;
         }
 
         public void CreateTile(Vector2 spawnPosition, Tile spawnTile)
@@ -133,7 +139,22 @@ namespace TileMap
             Vector2Int gridSpawnPosition = GetTileXY(spawnTile.gameObject.transform.position);
 
             spawnTile.Position = GetTileWorldPos(gridSpawnPosition);
+            spawnTile.gridPosition = gridSpawnPosition;
             tiles[gridSpawnPosition.x, gridSpawnPosition.y] = spawnTile;
+        }
+
+        public Tile GetFirstRoadTile()
+        {
+            foreach (var tile in tiles)
+            {
+                if(!tile)
+                    continue;
+
+                if(tile.type == TileType.Road) 
+                    return tile;
+            }
+
+            return null;
         }
     }
 }
