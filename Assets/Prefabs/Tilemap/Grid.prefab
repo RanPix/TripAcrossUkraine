@@ -2426,7 +2426,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d30e280cde4d6c967185f8829e4166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tilemap: {fileID: 0}
+  tilemap: {fileID: 5391463767146109277}
+  tilemapBaseTiles:
+  - {fileID: 11400000, guid: 3a0e0e6245da0ff459259e41e6ece529, type: 2}
+  - {fileID: 11400000, guid: 7d8ecf4a3ee20b34eafd27048ec0b9d1, type: 2}
+  - {fileID: 11400000, guid: f93193286d843f142a467d162a4dc748, type: 2}
   gridSize: {x: 22, y: 10}
   tileSize: 1
   origin: {x: -11, y: -5}

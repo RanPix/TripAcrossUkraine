@@ -9,10 +9,13 @@ namespace TileMap
         public static TileGrid instance;
 
         [SerializeField] private Tilemap tilemap;
+        [SerializeField] private TileBase[] tilemapBaseTiles;
+
         [SerializeField] private Vector2Int gridSize;
         [SerializeField] private Tile[,] tiles;
         [SerializeField] private float tileSize;
         [SerializeField] private Vector2 origin;
+        
 
         private void Awake()
         {
@@ -24,13 +27,10 @@ namespace TileMap
             tiles = new Tile[gridSize.x, gridSize.y];
         }
 
-        /*private void Start()
+        private void Start()
         {
-            foreach (var VARIABLE in tiles)
-            {
-                print(VARIABLE);
-            }
-        }*/
+            BuildTilemap();
+        }
 
         private void Update()
         {
@@ -154,6 +154,26 @@ namespace TileMap
             }
 
             return null;
+        }
+
+        private void BuildTilemap()
+        {
+            for (int x = 0; x < gridSize.x; x++)
+            {
+                for (int y = 0; y < gridSize.y; y++) 
+                {
+                    if (tiles[x, y])
+                        tilemap.SetTile(new Vector3Int(x, y, 0) - new Vector3Int(gridSize.x, gridSize.y, 0) / 2, GetTileBase(tiles[x, y].type));
+
+                    else
+                        tilemap.SetTile(new Vector3Int(x, y, 0) - new Vector3Int(gridSize.x, gridSize.y, 0) / 2, GetTileBase(TileType.Grass));
+                }
+            }
+        }
+
+        private TileBase GetTileBase(TileType type)
+        {
+            return tilemapBaseTiles[(int)type];
         }
     }
 }
