@@ -6,11 +6,21 @@ namespace TileMap
 {
     public class TileGrid : MonoBehaviour
     {
+        public static TileGrid instance;
+
         [SerializeField] private Tilemap tilemap;
         [SerializeField] private Vector2Int gridSize;
         [SerializeField] private Tile[,] tiles;
         [SerializeField] private float tileSize;
         [SerializeField] private Vector2 origin;
+
+        private void Awake()
+        {
+            if (instance == null)
+                instance = this;
+            else
+                Debug.LogError("TILEGRID INSTANCE ALREADY EXISTS");
+        }
 
         private void Start()
         {
@@ -100,6 +110,29 @@ namespace TileMap
         {
             return new Vector2Int(Mathf.FloorToInt((worldPosition.x - origin.x) / tileSize),
                                   Mathf.FloorToInt((worldPosition.y - origin.y) / tileSize));
+        }
+
+        public Vector2 GetTileWorldPos(Vector2 tilePos)
+        {
+            return tilePos - origin;
+        }
+
+        public void CreateTile(Vector2 spawnPosition, Tile spawnTile)
+        {
+            Vector2Int gridSpawnPosition = GetTileXY(spawnPosition);
+
+            spawnTile.globalPosition = GetTileWorldPos(gridSpawnPosition);
+            tiles[gridSpawnPosition.x, gridSpawnPosition.y] = spawnTile;
+
+            //Instantiate(spawnTile);
+        }
+
+        public void AddTile(Tile spawnTile)
+        {
+            Vector2Int gridSpawnPosition = GetTileXY(spawnTile.gameObject.transform.position);
+
+            spawnTile.globalPosition = GetTileWorldPos(gridSpawnPosition);
+            tiles[gridSpawnPosition.x, gridSpawnPosition.y] = spawnTile;
         }
     }
 }
