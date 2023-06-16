@@ -1,14 +1,14 @@
 using UnityEngine;
+using Vector2 = System.Numerics.Vector2;
 
 namespace TileMap
 {
-    public class TileMap : MonoBehaviour
+    public class TileGrid : MonoBehaviour
     {
         public TileType tileType;
         
-        [SerializeField] private Sprite _sprite;
         //[SerializeField] private Structure _structure;
-        public Tile _currentTile;
-        
+        [SerializeField] private Vector2 tiles;
+
     }
 }
