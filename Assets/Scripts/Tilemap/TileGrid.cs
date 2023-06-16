@@ -7,8 +7,16 @@ namespace TileMap
     {
         public TileType tileType;
         
-        //[SerializeField] private Structure _structure;
-        [SerializeField] private Vector2 tiles;
+        [SerializeField] private Vector2 gridSize;
+        [SerializeField] private Tile[,] tiles;
+
+        
+        
+        public Tile[,] GetTiles() => tiles;
+        public Tile[] GetNeighborTiles(Tile tile)
+        { 
+            Tile[] neighbors = new Tile[4];
+        }
 
     }
 }

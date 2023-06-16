@@ -1,12 +1,13 @@
-using System.Numerics;
+using UnityEngine;
 
 namespace TileMap
 {
     public class Tile
     {
-        public Tile[] neighborTiles = new Tile[4];
+        //[SerializeField] private Structure _structure;
+        public Vector2 indexPosition;
         
         private Vector2 tileSize;
-
+        
     }
 }
