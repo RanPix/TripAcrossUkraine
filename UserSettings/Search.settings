@@ -10,6 +10,9 @@ scopes = {
 	"last_search.F8949528" = "krutil"
 	"OpenInspectorPreview.F8949528" = "0"
 	"currentGroup.F8949528" = "all"
+	"last_search.2138236A" = "krutil"
+	"OpenInspectorPreview.2138236A" = "0"
+	"currentGroup.2138236A" = "asset"
 }
 providers = {
 	adb = {
