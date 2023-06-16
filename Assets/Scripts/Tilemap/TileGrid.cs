@@ -122,6 +122,7 @@ namespace TileMap
             Vector2Int gridSpawnPosition = GetTileXY(spawnPosition);
 
             spawnTile.globalPosition = GetTileWorldPos(gridSpawnPosition);
+            spawnTile.gridPosition = gridSpawnPosition;
             tiles[gridSpawnPosition.x, gridSpawnPosition.y] = spawnTile;
 
             //Instantiate(spawnTile);
