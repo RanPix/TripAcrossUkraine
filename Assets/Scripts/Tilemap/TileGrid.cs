@@ -1,18 +1,33 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace TileMap
 {
     public class TileGrid : MonoBehaviour
     {
-        public TileType tileType;
-        
-        [SerializeField] private Vector2 gridSize;
+        [SerializeField] private Tilemap tilemap;
+        [SerializeField] private Vector2Int gridSize;
         [SerializeField] private Tile[,] tiles;
+        [SerializeField] private float tileSize;
+        [SerializeField] private Vector2 origin;
 
-        
-        
+        private void Start()
+        {
+            tiles = new Tile[gridSize.x, gridSize.y];
+        }
+
+        private void Update()
+        {
+            print(GetTileXY(Camera.main.ScreenToWorldPoint(Input.mousePosition)));
+        }
+
         public Tile[,] GetTiles() => tiles;
+        public Tile GetTile(Vector2 tilePosition)
+        {
+            Vector2Int tileIndex = GetTileXY(tilePosition);
+            return tiles[tileIndex.x, tileIndex.y];
+        }
 
         /// <returns> Four tiles around tile </returns>
         public Tile[] GetNeumannNeighbourTiles(Tile tile)
@@ -79,6 +94,12 @@ namespace TileMap
 
 
             return neighburs.ToArray();
+        }
+
+        private Vector2Int GetTileXY(Vector2 worldPosition)
+        {
+            return new Vector2Int(Mathf.FloorToInt((worldPosition.x - origin.x) / tileSize),
+                                  Mathf.FloorToInt((worldPosition.y - origin.y) / tileSize));
         }
     }
 }
