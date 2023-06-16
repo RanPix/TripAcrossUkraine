@@ -121,7 +121,7 @@ namespace TileMap
         {
             Vector2Int gridSpawnPosition = GetTileXY(spawnPosition);
 
-            spawnTile.globalPosition = GetTileWorldPos(gridSpawnPosition);
+            spawnTile.Position = GetTileWorldPos(gridSpawnPosition);
             spawnTile.gridPosition = gridSpawnPosition;
             tiles[gridSpawnPosition.x, gridSpawnPosition.y] = spawnTile;
 
@@ -132,7 +132,7 @@ namespace TileMap
         {
             Vector2Int gridSpawnPosition = GetTileXY(spawnTile.gameObject.transform.position);
 
-            spawnTile.globalPosition = GetTileWorldPos(gridSpawnPosition);
+            spawnTile.Position = GetTileWorldPos(gridSpawnPosition);
             tiles[gridSpawnPosition.x, gridSpawnPosition.y] = spawnTile;
         }
     }
