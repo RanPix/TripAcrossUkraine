@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             Move();
         }
@@ -27,7 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move()
     {
-        _transform.position = _nextTile.Position;
+        _transform.position = new Vector3(_nextTile.Position.x, _nextTile.Position.y, -0.1f);
+        
         _previousTile = _currentTile;
         _currentTile = _nextTile;
         SetNextTile();
@@ -40,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
         Tile[] _tiles = TileGrid.instance.GetNeumannNeighbourTiles(_currentTile);
         foreach (var tile in _tiles)
         {
-            if(tile == _previousTile)
+            if(tile == _previousTile || !tile)
                 continue;
             if(tile.type != TileType.Road)
                 continue;
