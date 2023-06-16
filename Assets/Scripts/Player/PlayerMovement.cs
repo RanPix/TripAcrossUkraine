@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TileMap;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -40,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Tile SetNextTile()
     {
+        print(_currentTile.gridPosition);
         Tile[] _tiles = TileGrid.instance.GetNeumannNeighbourTiles(_currentTile);
         foreach (var tile in _tiles)
         {

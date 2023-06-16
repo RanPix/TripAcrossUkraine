@@ -10,10 +10,10 @@ namespace TileMap
         public Vector2 Position
         {
             get
-                => (Vector2) this.transform.position;
+                => (Vector2) transform.position;
             
             set
-                => this.transform.position = value;
+                => transform.position = value;
         }
 
         private void Awake()
