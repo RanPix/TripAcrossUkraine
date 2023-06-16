@@ -1,5 +1,4 @@
 using UnityEngine;
-using Vector2 = System.Numerics.Vector2;
 
 namespace TileMap
 {
@@ -13,10 +12,16 @@ namespace TileMap
         
         
         public Tile[,] GetTiles() => tiles;
-        public Tile[] GetNeighborTiles(Tile tile)
+        public Tile[] GetNeighbourTiles(Tile tile)
         { 
-            Tile[] neighbors = new Tile[4];
-        }
+            Tile[] neighburs = new Tile[4];
 
+            neighburs[0] = tiles[tile.gridPosition.x - 1, tile.gridPosition.y];
+            neighburs[1] = tiles[tile.gridPosition.x + 1, tile.gridPosition.y];
+            neighburs[2] = tiles[tile.gridPosition.x, tile.gridPosition.y - 1];
+            neighburs[3] = tiles[tile.gridPosition.x, tile.gridPosition.y + 1];
+
+            return neighburs;
+        }
     }
 }
