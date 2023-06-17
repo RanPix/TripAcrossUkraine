@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -134,6 +135,9 @@ namespace TileMap
                 if (conflictTile.type == spawnTileArgs.type)
                     return;
 
+                else if (conflictTile.type == TileType.Road)
+                    return;
+
                 else
                 {
                     Destroy(conflictTile.gameObject);
@@ -141,9 +145,7 @@ namespace TileMap
                 }
             }
 
-            Tile spawnedTile = Instantiate(tilePrefab, spawnPosition, Quaternion.identity).GetComponent<Tile>();
-
-            spawnedTile.SetArgs(spawnTileArgs);
+            Instantiate(tilePrefab, spawnPosition, Quaternion.identity).GetComponent<Tile>().SetArgs(spawnTileArgs);
         }
 
         public void AddTile(Tile spawnTile)
@@ -163,17 +165,16 @@ namespace TileMap
             {
                 if(!tile)
                     continue;
-                print("cont");
+                //print("cont");
                 if(tile.type == TileType.Road) 
                     return tile;
             }
-            print("hello");
+            //print("hello");
             return null;
         }
 
         private void BuildTilemap()
         {
-
             for (int x = 0; x < gridSize.x; x++)
             {
                 for (int y = 0; y < gridSize.y ; y++) 

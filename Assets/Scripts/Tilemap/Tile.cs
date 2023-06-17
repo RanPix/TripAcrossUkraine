@@ -43,21 +43,16 @@ namespace TileMap
                 => transform.position = value;
         }
 
-        private void Awake()
-        {
-            TileGrid.instance.AddTile(this);
-        }
-
         private void Start()
         {
+            TileGrid.instance.AddTile(this);
             TypeProcessing();
         }
-
-
         public void SetArgs(TileCreateArgs args)
         {
             type = args.type;
         }
+
 
         public void SetDamage(int damage)
         {

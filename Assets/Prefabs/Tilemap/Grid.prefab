@@ -1654,10 +1654,10 @@ Tilemap:
       m_TileIndex: 2
       m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
+      m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 1073741825
+      m_AllTileFlags: 1073741827
   - first: {x: -8, y: 2, z: 0}
     second:
       serializedVersion: 2
@@ -1824,10 +1824,10 @@ Tilemap:
       m_TileIndex: 4
       m_TileSpriteIndex: 4
       m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
+      m_TileColorIndex: 2
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
-      m_AllTileFlags: 1073741825
+      m_AllTileFlags: 1073741827
   - first: {x: 9, y: 2, z: 0}
     second:
       serializedVersion: 2
@@ -2312,11 +2312,11 @@ Tilemap:
   - m_RefCount: 1
     m_Data: {fileID: -934050666, guid: 80b97cfd8977b754fbc524dab091d3ce, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 1432043601, guid: 80b97cfd8977b754fbc524dab091d3ce, type: 3}
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -170456373, guid: 80b97cfd8977b754fbc524dab091d3ce, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 1104629592, guid: 80b97cfd8977b754fbc524dab091d3ce, type: 3}
+    m_Data: {fileID: 0}
   - m_RefCount: 176
     m_Data: {fileID: 1622657144, guid: 80b97cfd8977b754fbc524dab091d3ce, type: 3}
   - m_RefCount: 8
@@ -2343,8 +2343,12 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 220
+  - m_RefCount: 218
     m_Data: {r: 1, g: 1, b: 1, a: 1}
+  - m_RefCount: 1
+    m_Data: {r: 0.84093505, g: 0.49861324, b: 0.57256573, a: 1}
+  - m_RefCount: 1
+    m_Data: {r: 0.8933703, g: 0.5606446, b: 0.632786, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2432,7 +2436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 5391463767146109277}
   tilemapBaseTiles:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: f93193286d843f142a467d162a4dc748, type: 2}
   - {fileID: 11400000, guid: ce0844a705306074993dc10290d05f94, type: 2}
   - {fileID: 11400000, guid: e8850680e8a1227429415f3e66da49eb, type: 2}
   - {fileID: 11400000, guid: 3a0e0e6245da0ff459259e41e6ece529, type: 2}
