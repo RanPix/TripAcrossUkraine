@@ -16,4 +16,9 @@ class BuildingPanel : MonoBehaviour
         this.buildingData = buildingData;
         image.sprite = buildingData.sprite;
     }
+
+    public void SelelectBuilding()
+    {
+        Building.instance.selectedBuilding = buildingData.building;
+    }
 }
