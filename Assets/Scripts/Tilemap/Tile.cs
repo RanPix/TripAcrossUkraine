@@ -11,7 +11,7 @@ namespace TileMap
     public class Tile : MonoBehaviour
     {
         [SerializeField] private TileType _type;
-        [SerializeField] private GameObject _
+        [SerializeField] private GameObject enemy;
         
         public TileType type
         {

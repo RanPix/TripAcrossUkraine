@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TileMap;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -12,7 +13,7 @@ public class EntitySpawner : MonoBehaviour
     private Dictionary<Tile, GameObject> enemies = new();
     private Tile tile;
     private int turnsToSpawn = 5;
-    private List<int> deletedEnemies = new ();
+    //private List<int> deletedEnemies = new ();
     private Dictionary<Tile, int> deletedEnemiess = new();
 
 
@@ -33,27 +34,26 @@ public class EntitySpawner : MonoBehaviour
 
     private void AddToSpawn()
     {
-        int i = 0;
-        foreach (var enemy in enemies.Values)
+        for (int i = 0; i < enemies.Values.Count; i++)
         {
-            if (enemy)
+            if (enemies.Values.ToArray().GetValue(i) != null)
                 continue;
-           Tile __tile = 
-            deletedEnemiess.Add();
             
-            deletedEnemies.Add(turnsToSpawn);
-            i++;
+            Tile __tile = enemies.Keys.ToArray()[i];
+            if(!deletedEnemiess.ContainsKey(__tile))
+                deletedEnemiess.Add(__tile, turnsToSpawn);
+            
         }
     }
 
     private void SubtractMoves()
     {
-        for(int i = 0; i < deletedEnemies.Count; i++)
+        for(int i = 0; i < deletedEnemiess.Count; i++)
         {
-            deletedEnemies[i]--;
-            if (deletedEnemies[i] == 0)
+            deletedEnemiess[deletedEnemiess.Keys.ToArray()[i]]--;
+            if (deletedEnemiess[deletedEnemiess.Keys.ToArray()[i]] == 0)
             {
-                deletedEnemies.Remove(deletedEnemies[i]);
+                deletedEnemiess.Remove(deletedEnemiess.Keys.ToArray()[i]);
                 SetEmptyTiles();
             }
         }
@@ -70,6 +70,7 @@ public class EntitySpawner : MonoBehaviour
 
             var enemy = Instantiate(enemiesPrefabs[(int)Random.Range(0, enemiesPrefabs.Length - 0.0001f)], _tile.gameObject.transform);
             enemy.GetComponent<RandomMove>().tile = _tile;
+            enemies[_tile] = enemy;
 
             return;
         }
