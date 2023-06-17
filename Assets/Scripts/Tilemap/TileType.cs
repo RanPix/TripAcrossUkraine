@@ -7,5 +7,10 @@ namespace TileMap
         Road,
         Village,
         Forest,
+        Lavra,
+        GoldenGates,
+        LvivTownHall,
+        Hill,
+        EasterEggMuseum,
     }
 }

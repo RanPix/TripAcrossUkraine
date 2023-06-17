@@ -1,4 +1,6 @@
-public class Village
+using UnityEngine;
+
+public class Village : MonoBehaviour
 {
     
 }

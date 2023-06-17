@@ -14,11 +14,6 @@ public class Building : MonoBehaviour
         controls.Player.Select.performed += PlaceBuilding;
     }
 
-    private void Update()
-    {
-        
-    }
-
     private void PlaceBuilding(InputAction.CallbackContext context)
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
