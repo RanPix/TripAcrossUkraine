@@ -153,10 +153,10 @@ namespace TileMap
             
 
             bool hasRoads = false;
-            foreach (Tile tile in GetMooreNeighbourTiles(gridSpawnPosition))
+            foreach (Tile _tile in GetMooreNeighbourTiles(gridSpawnPosition))
             {
-                if (tile != null)
-                    hasRoads = tile.type == TileType.Road;
+                if (_tile != null)
+                    hasRoads = _tile.type == TileType.Road;
 
                 if (hasRoads)
                     break;
@@ -171,6 +171,8 @@ namespace TileMap
             var surroundingTiles = GetMooreNeighbourTiles(tile);
             foreach (var _tile in surroundingTiles)
             {
+                if(!_tile)
+                    continue;
                 _tile.UpdateSurroundings();
             }
         }

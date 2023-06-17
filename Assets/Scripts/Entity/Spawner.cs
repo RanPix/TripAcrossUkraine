@@ -43,6 +43,7 @@ public class Spawner : MonoBehaviour
     public void UpdateSpawnerData()
     {
         spawnerDatas.Clear();
+        print(parentTile + "    asdsadasda");
         currentNeighbours = TileGrid.instance.GetMooreNeighbourTiles(parentTile);
 
         foreach (Tile tile in currentNeighbours)
@@ -54,7 +55,11 @@ public class Spawner : MonoBehaviour
             {
                 case TileType.Forest:
                     if (!spawnerDatas.ContainsKey(EntityType.Wolf))
+                    {
+                        print("Foreest");
                         spawnerDatas.Add(EntityType.Wolf, 1);
+                    }
+
                     else
                         spawnerDatas[EntityType.Wolf]++;
                     break;
@@ -64,6 +69,6 @@ public class Spawner : MonoBehaviour
             }
         }
 
-        Debug.Log(spawnerDatas[EntityType.Wolf], this);
+        //Debug.Log(spawnerDatas[EntityType.Wolf], this);
     }
 }
