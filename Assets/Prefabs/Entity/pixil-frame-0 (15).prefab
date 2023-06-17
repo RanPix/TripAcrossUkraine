@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9067578621521174057}
   - component: {fileID: 4163807575207632188}
   - component: {fileID: 26517550138990822}
+  - component: {fileID: -5562926393284554053}
   m_Layer: 0
   m_Name: pixil-frame-0 (15)
   m_TagString: Untagged
@@ -99,3 +100,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tile: {fileID: 0}
   speed: 0.2
+  direction: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+--- !u!114 &-5562926393284554053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427582881594087054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3255ab3b36c17964ca680b128567856f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: 
+  damage: 0
+  hp: 0
+  sprite: {fileID: 21300000, guid: a52a54c4923fd684083a46fb34d38ab4, type: 3}

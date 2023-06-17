@@ -43,13 +43,14 @@ public class Spawner : MonoBehaviour
     public void UpdateSpawnerData()
     {
         spawnerDatas.Clear();
+        //print(parentTile + "    asdsadasda");
         currentNeighbours = TileGrid.instance.GetMooreNeighbourTiles(parentTile);
-
+        print(parentTile.type + "          parent type");
         foreach (Tile tile in currentNeighbours)
         {
             if (tile == null)
                 continue;
-
+            print(tile.type + "    type");
             switch (tile.type)
             {
                 case TileType.Forest:

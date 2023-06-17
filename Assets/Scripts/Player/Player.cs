@@ -7,33 +7,44 @@ namespace Player
     {
         [SerializeField] private int money;
         
-        [SerializeField] private int _maxHP;
-        [SerializeField] private int _currentHP;
+        public int damage { get; set; } = 30;
+        public int maxHP { get; set; } = 100;
+        public int currentHP { get; set; }
+        public Action OnDeath { get; set; }
+        public float timeBetweenAttacks { get; set; }
+        public float lastAttackTime { get; set; }
 
-        public Action OnDeath;
-
+        [SerializeField] private GameObject fighting;
         private void Start()
         {
             CharacterAndUIConnector.instance.ConnectUI(this);
         }
 
+
         public void Damage(int damage)
         {
-            _currentHP -= damage;
-            if (_currentHP <= 0)
+            currentHP -= damage;
+            if (currentHP <= 0)
                 Die();
         }
 
         public void GetHeal(int heal)
         {
-            _currentHP += heal;
-            if (_currentHP > _maxHP)
-                _currentHP = _maxHP;
+            currentHP += heal;
+            if (currentHP > maxHP)
+                currentHP = maxHP;
         }
 
-        private void Die()
+        public void Die()
         {
             OnDeath?.Invoke();
+        }
+
+        public void Fight(IDamagable enemy)
+        {
+            Fighting fightingGO = GameObject.Instantiate(fighting, GameObject.FindWithTag("Canvas").transform).GetComponent<Fighting>();
+            fightingGO.player.damagable = this;
+            fightingGO.enemy.damagable = enemy;
         }
     }
 }

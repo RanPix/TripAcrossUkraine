@@ -31,8 +31,10 @@ public class PlayerMovement : MonoBehaviour
     public void Move()
     {
         SetPositionToTile(_nextTile);
-
-
+        if (_currentTile.enemy)
+        {
+            GetComponent<Player.Player>().Fight(_currentTile.enemy);
+        }
 
         _previousTile = _currentTile;
         _currentTile = _nextTile;
