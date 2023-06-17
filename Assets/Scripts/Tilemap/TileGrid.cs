@@ -11,7 +11,6 @@ namespace TileMap
 
         [SerializeField] private Tilemap tilemap;
         [SerializeField] private TileBase[] tilemapBaseTiles;
-        [SerializeField] private RuleTile tilemapBaseRoadTile;
 
         [SerializeField] private GameObject tilePrefab;
 
