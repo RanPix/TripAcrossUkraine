@@ -32,6 +32,7 @@ namespace TileMap
         public Action OnPlayerEnter;
 
         private Tile[] tilesWithInfluence  = new Tile[0];
+        public Enemy enemy;
 
         public Vector2 Position
         {
@@ -42,7 +43,7 @@ namespace TileMap
                 => transform.position = value;
         }
 
-        private void Start()
+        public void Start()
         {
             TileGrid.instance.AddTile(this);
             TypeProcessing();
@@ -107,6 +108,17 @@ namespace TileMap
         public void UpdateSurroundings()
         {
             GetComponent<Spawner>()?.UpdateSpawnerData();
+        }
+
+        private void Update()
+        {
+            if (!enemy)
+            {
+                if (GetComponentInChildren<Enemy>())
+                {
+                    enemy = GetComponentInChildren<Enemy>();
+                }
+            }
         }
     }
 }
