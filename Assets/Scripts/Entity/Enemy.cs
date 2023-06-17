@@ -1,3 +1,4 @@
+using TileMap;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour, IDamagable
@@ -7,6 +8,13 @@ public class Enemy : MonoBehaviour, IDamagable
     [SerializeField] private int hp;
 
     [SerializeField] private Sprite sprite;
+    private Tile parentTile;
+    private Tile roadTile;
+
+    private void Awake()
+    {
+        parentTile.GetComponent<EntitySpawner>();
+    }
 
     public void Damage(int damage)
     {

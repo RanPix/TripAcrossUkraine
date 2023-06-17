@@ -11,6 +11,7 @@ namespace TileMap
     public class Tile : MonoBehaviour
     {
         [SerializeField] private TileType _type;
+        [SerializeField] private GameObject _
         
         public TileType type
         {
@@ -106,7 +107,7 @@ namespace TileMap
 
         public void UpdateSurroundings()
         {
-            GetComponent<Spawner>()?.UpdateSpawnerData();
+            GetComponent<EntitySpawner>()?.UpdateSurroundingRoads();
         }
     }
 }

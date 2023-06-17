@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4366092393581563271}
   - component: {fileID: 7303377744453849854}
-  - component: {fileID: -4978467053003385930}
   m_Layer: 0
   m_Name: Road
   m_TagString: Untagged
@@ -49,16 +48,3 @@ MonoBehaviour:
   _influenceNeighboursType: 0
   gridPosition: {x: 0, y: 0}
   player: {fileID: 0}
---- !u!114 &-4978467053003385930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4336064117075333770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 337d411a306432742948298d76532d14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 1427582881594087054, guid: d3b15ba19148ea146a6f20452bdebee3, type: 3}
