@@ -107,7 +107,7 @@ namespace TileMap
 
         public void UpdateSurroundings()
         {
-            GetComponent<Spawner>()?.UpdateSpawnerData();
+            GetComponent<EntitySpawner>()?.UpdateSurroundingRoads();
         }
 
         private void Update()

@@ -46,10 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemsToSpawn:
   - {fileID: 5868775136228353723, guid: 0fbbecd329f663b4897a5803f5e6a90c, type: 3}
+  - {fileID: 3940613545236886551, guid: 5beb722ed5b9c464bb12b1ace21af2b4, type: 3}
   - {fileID: 5391463766609559129, guid: 713422a32ccdcbe4586792337f1add2d, type: 3}
   - {fileID: 3387002801386471738, guid: f3dfcf1e0cbd9ee41960dd1323334c7a, type: 3}
   - {fileID: 8163777140857597541, guid: d34a590fda6c97845901e1b93983988b, type: 3}
   - {fileID: 5744193298443882711, guid: 0ce3f59d953446e4d88be8c4cd6bfcf3, type: 3}
-  - {fileID: 3940613545236886551, guid: 5beb722ed5b9c464bb12b1ace21af2b4, type: 3}
   - {fileID: 8996067321340641562, guid: d4b6a34595fe25845a75afd6c45e6be0, type: 3}
   - {fileID: 8466170855900953479, guid: 4f72a3c4a58c9e2459c3d8db0f096b90, type: 3}

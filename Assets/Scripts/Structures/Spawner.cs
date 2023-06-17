@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject enemyPrefab;
 
     private Tile parentTile;
-    private Dictionary<EntityType, int> spawnerDatas = new();
+    [HideInInspector] public Dictionary<EntityType, int> spawnerDatas = new();
     private Tile[] currentNeighbours;
 
     private void Start()
