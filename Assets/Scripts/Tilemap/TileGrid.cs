@@ -19,7 +19,10 @@ namespace TileMap
         [SerializeField] private Tile[,] tiles;
         [SerializeField] private float tileSize;
         [SerializeField] private Vector2 origin;
-
+        
+        [SerializeField] private List<TileType> tileTypes;
+        [SerializeField] private List<AchievementScriptableObject> achievementScriptableObjects;
+        public Dictionary<TileType, AchievementScriptableObject> achievementScriptableObjectsDictionary = new ();
 
         private void Awake()
         {
@@ -33,6 +36,10 @@ namespace TileMap
 
         private void Start()
         {
+            for (int i = 0; i < tileTypes.Count; i++)
+            {
+                achievementScriptableObjectsDictionary.Add(tileTypes[i], achievementScriptableObjects[i]);
+            }
             BuildTilemap();
         }
 

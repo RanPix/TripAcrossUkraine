@@ -8,12 +8,17 @@ public class Building : MonoBehaviour
     public static Building instance;
     private PlayerControls controls;
     public TileType selectedBuilding = TileType.Grass;
-    public Action onPlace;
+    public Action<string, AchievementScriptableObject> OnPlace;
 
-    private void Start()
+    private void Awake()
     {
         if (instance is null)
             instance = this;
+    }
+
+    private void Start()
+    {
+        OnPlace += AchievementsManager.instance.TryActivateNewAchievement;
 
         controls = new PlayerControls();
         controls.Player.Enable();
@@ -27,6 +32,6 @@ public class Building : MonoBehaviour
 
         TileGrid.instance.CreateTile(mousePosition, new TileCreateArgs(selectedBuilding));
 
-        onPlace?.Invoke();
+        OnPlace?.Invoke(selectedBuilding.ToString(), TileGrid.instance.achievementScriptableObjectsDictionary[selectedBuilding]);
     }
 }

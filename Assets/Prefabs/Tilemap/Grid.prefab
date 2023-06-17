@@ -2451,3 +2451,7 @@ MonoBehaviour:
   gridSize: {x: 22, y: 10}
   tileSize: 1
   origin: {x: -11, y: -5}
+  tileTypes: 0300000004000000
+  achievementScriptableObjects:
+  - {fileID: 11400000, guid: 4ab13a8253ca7854299d5f56d1c4b66d, type: 2}
+  - {fileID: 11400000, guid: ae5268a0b44cec44fae2b7d2e8094f01, type: 2}
