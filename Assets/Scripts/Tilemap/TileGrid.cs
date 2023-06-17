@@ -163,7 +163,11 @@ namespace TileMap
                 for (int y = 0; y < gridSize.y; y++) 
                 {
                     if (tiles[x, y])
+                    {
+                        tiles[x,y].gameObject.SetActive(false);
+                        print(tiles[x,y]);
                         tilemap.SetTile(new Vector3Int(x, y, 0) - new Vector3Int(gridSize.x, gridSize.y, 0) / 2, GetTileBase(tiles[x, y].type));
+                    }
 
                     else
                         tilemap.SetTile(new Vector3Int(x, y, 0) - new Vector3Int(gridSize.x, gridSize.y, 0) / 2, GetTileBase(TileType.Grass));

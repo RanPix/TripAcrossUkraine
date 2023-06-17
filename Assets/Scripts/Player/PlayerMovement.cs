@@ -25,13 +25,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    public void Move()
+    private void Move()
     {
         _transform.position = new Vector3(_nextTile.Position.x, _nextTile.Position.y, -0.1f);
         
         _previousTile = _currentTile;
         _currentTile = _nextTile;
         SetNextTile();
+        
+        _currentTile.OnPlayerEnter?.Invoke();
     }
 
 
@@ -43,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if(tile == _previousTile || !tile)
                 continue;
-            if(tile.type != TileType.Road)
+                if(tile.type != TileType.Road)
                 continue;
             _nextTile = tile;
             return tile;
