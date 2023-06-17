@@ -68,7 +68,5 @@ public class Spawner : MonoBehaviour
                     break;
             }
         }
-
-        //Debug.Log(spawnerDatas[EntityType.Wolf], this);
     }
 }

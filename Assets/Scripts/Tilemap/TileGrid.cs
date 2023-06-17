@@ -96,8 +96,6 @@ namespace TileMap
             {                  // (0, -1) => (0, 1)
                 if (isntTopWall)
                     neighburs.Add(tiles[tile.x, tile.y - 1]);
-
-                neighburs.Add(tiles[tile.x, tile.y]);
                     
                 if (isntBottomWall)
                     neighburs.Add(tiles[tile.x, tile.y + 1]);
@@ -171,9 +169,7 @@ namespace TileMap
             var surroundingTiles = GetMooreNeighbourTiles(tile);
             foreach (var _tile in surroundingTiles)
             {
-                if(!_tile)
-                    continue;
-                _tile.UpdateSurroundings();
+                _tile?.UpdateSurroundings();
             }
         }
 
