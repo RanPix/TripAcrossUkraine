@@ -27,6 +27,12 @@ namespace TileMap
         {
             TileGrid.instance.AddTile(this);
         }
+
+        public void SetArgs(TileCreateArgs args)
+        {
+            type = args.type;
+        }
+
         public void SetDamage(int damage)
         {
             this.damage = damage;

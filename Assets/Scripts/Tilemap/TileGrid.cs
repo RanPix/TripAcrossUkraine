@@ -11,6 +11,8 @@ namespace TileMap
         [SerializeField] private Tilemap tilemap;
         [SerializeField] private TileBase[] tilemapBaseTiles;
 
+        [SerializeField] private GameObject tilePrefab;
+
         [SerializeField] private Vector2Int gridSize;
         [SerializeField] private Tile[,] tiles;
         [SerializeField] private float tileSize;
@@ -122,24 +124,37 @@ namespace TileMap
             return tilePos + origin + new Vector2(tileSize, tileSize) * 0.5f;
         }
 
-        public void CreateTile(Vector2 spawnPosition, Tile spawnTile)
+        public void CreateTile(Vector2 spawnPosition, TileCreateArgs spawnTileArgs)
         {
             Vector2Int gridSpawnPosition = GetTileXY(spawnPosition);
+            Tile conflictTile = tiles[gridSpawnPosition.x, gridSpawnPosition.y];
 
-            spawnTile.Position = GetTileWorldPos(gridSpawnPosition);
-            spawnTile.gridPosition = gridSpawnPosition;
-            tiles[gridSpawnPosition.x, gridSpawnPosition.y] = spawnTile;
+            if (conflictTile != null)
+            {
+                if (conflictTile.type == spawnTileArgs.type)
+                    return;
 
-            //Instantiate(spawnTile);
+                else
+                {
+                    Destroy(conflictTile.gameObject);
+                    tiles[gridSpawnPosition.x, gridSpawnPosition.y] = null;
+                }
+            }
+
+            Tile spawnedTile = Instantiate(tilePrefab, spawnPosition, Quaternion.identity).GetComponent<Tile>();
+
+            spawnedTile.SetArgs(spawnTileArgs);
         }
 
         public void AddTile(Tile spawnTile)
         {
-            Vector2Int gridSpawnPosition = GetTileXY(spawnTile.gameObject.transform.position);
+            Vector2Int gridSpawnPosition = GetTileXY(spawnTile.Position);
 
             spawnTile.Position = GetTileWorldPos(gridSpawnPosition);
             spawnTile.gridPosition = gridSpawnPosition;
             tiles[gridSpawnPosition.x, gridSpawnPosition.y] = spawnTile;
+
+            BuildTilemap();
         }
 
         public Tile GetFirstRoadTile()
@@ -158,16 +173,13 @@ namespace TileMap
 
         private void BuildTilemap()
         {
+
             for (int x = 0; x < gridSize.x; x++)
             {
-                for (int y = 0; y < gridSize.y; y++) 
+                for (int y = 0; y < gridSize.y ; y++) 
                 {
                     if (tiles[x, y])
-                    {
-                        tiles[x,y].gameObject.SetActive(false);
-                        print(tiles[x,y]);
                         tilemap.SetTile(new Vector3Int(x, y, 0) - new Vector3Int(gridSize.x, gridSize.y, 0) / 2, GetTileBase(tiles[x, y].type));
-                    }
 
                     else
                         tilemap.SetTile(new Vector3Int(x, y, 0) - new Vector3Int(gridSize.x, gridSize.y, 0) / 2, GetTileBase(TileType.Grass));
@@ -177,7 +189,11 @@ namespace TileMap
 
         private TileBase GetTileBase(TileType type)
         {
-            return tilemapBaseTiles[(int)type];
+            if ((int)type < tilemapBaseTiles.Length)
+                return tilemapBaseTiles[(int)type];
+
+            else
+                return tilemapBaseTiles[0];
         }
     }
 }
