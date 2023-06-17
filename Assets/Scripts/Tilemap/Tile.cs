@@ -11,7 +11,8 @@ namespace TileMap
 {
     public class Tile : MonoBehaviour
     {
-        private TileType _type;
+        [SerializeField] private TileType _type;
+        
         public TileType type
         {
             get => _type;
@@ -80,6 +81,8 @@ namespace TileMap
         {
             foreach (Tile _tile in tilesWithInfluence)
             {
+                if(!_tile)
+                    continue;
                 _tile.OnPlayerEnter = null;
             }
             
@@ -98,6 +101,8 @@ namespace TileMap
                 case TileType.Village:
                     foreach (var _tile in tilesWithInfluence)
                     {
+                        if(!_tile)
+                            continue;
                         _tile.SetHeal(5);
                         _tile.OnPlayerEnter += _tile.GiveHealToPlayer;
                     }

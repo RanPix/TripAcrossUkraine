@@ -5,6 +5,8 @@ namespace Player
 {
     public class Player : MonoBehaviour
     {
+        [SerializeField] private int money;
+        
         [SerializeField] private int _maxHP;
         [SerializeField] private int _currentHP;
 
