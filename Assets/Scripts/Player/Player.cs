@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class Player
+    public class Player : MonoBehaviour
     {
         [SerializeField] private int _maxHP;
         [SerializeField] private int _currentHP;
