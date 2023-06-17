@@ -1,4 +1,4 @@
-using System;
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -10,10 +10,15 @@ namespace TileMap
         public static TileGrid instance;
 
         [SerializeField] private Tilemap tilemap;
+        [SerializeField] private TileBase[] tilemapBaseTiles;
+
+        [SerializeField] private GameObject tilePrefab;
+
         [SerializeField] private Vector2Int gridSize;
         [SerializeField] private Tile[,] tiles;
         [SerializeField] private float tileSize;
         [SerializeField] private Vector2 origin;
+        
 
         private void Awake()
         {
@@ -25,13 +30,10 @@ namespace TileMap
             tiles = new Tile[gridSize.x, gridSize.y];
         }
 
-        /*private void Start()
+        private void Start()
         {
-            foreach (var VARIABLE in tiles)
-            {
-                print(VARIABLE);
-            }
-        }*/
+            BuildTilemap();
+        }
 
         private void Update()
         {
@@ -123,24 +125,38 @@ namespace TileMap
             return tilePos + origin + new Vector2(tileSize, tileSize) * 0.5f;
         }
 
-        public void CreateTile(Vector2 spawnPosition, Tile spawnTile)
+        public void CreateTile(Vector2 spawnPosition, TileCreateArgs spawnTileArgs)
         {
             Vector2Int gridSpawnPosition = GetTileXY(spawnPosition);
+            Tile conflictTile = tiles[gridSpawnPosition.x, gridSpawnPosition.y];
 
-            spawnTile.Position = GetTileWorldPos(gridSpawnPosition);
-            spawnTile.gridPosition = gridSpawnPosition;
-            tiles[gridSpawnPosition.x, gridSpawnPosition.y] = spawnTile;
+            if (conflictTile != null)
+            {
+                if (conflictTile.type == spawnTileArgs.type)
+                    return;
 
-            //Instantiate(spawnTile);
+                else if (conflictTile.type == TileType.Road)
+                    return;
+
+                else
+                {
+                    Destroy(conflictTile.gameObject);
+                    tiles[gridSpawnPosition.x, gridSpawnPosition.y] = null;
+                }
+            }
+
+            Instantiate(tilePrefab, spawnPosition, Quaternion.identity).GetComponent<Tile>().SetArgs(spawnTileArgs);
         }
 
         public void AddTile(Tile spawnTile)
         {
-            Vector2Int gridSpawnPosition = GetTileXY(spawnTile.gameObject.transform.position);
+            Vector2Int gridSpawnPosition = GetTileXY(spawnTile.Position);
 
             spawnTile.Position = GetTileWorldPos(gridSpawnPosition);
             spawnTile.gridPosition = gridSpawnPosition;
             tiles[gridSpawnPosition.x, gridSpawnPosition.y] = spawnTile;
+
+            BuildTilemap();
         }
 
         public Tile GetFirstRoadTile()
@@ -149,12 +165,36 @@ namespace TileMap
             {
                 if(!tile)
                     continue;
-
+                //print("cont");
                 if(tile.type == TileType.Road) 
                     return tile;
             }
-
+            //print("hello");
             return null;
+        }
+
+        private void BuildTilemap()
+        {
+            for (int x = 0; x < gridSize.x; x++)
+            {
+                for (int y = 0; y < gridSize.y ; y++) 
+                {
+                    if (tiles[x, y])
+                        tilemap.SetTile(new Vector3Int(x, y, 0) - new Vector3Int(gridSize.x, gridSize.y, 0) / 2, GetTileBase(tiles[x, y].type));
+
+                    else
+                        tilemap.SetTile(new Vector3Int(x, y, 0) - new Vector3Int(gridSize.x, gridSize.y, 0) / 2, GetTileBase(TileType.Grass));
+                }
+            }
+        }
+
+        private TileBase GetTileBase(TileType type)
+        {
+            if ((int)type < tilemapBaseTiles.Length)
+                return tilemapBaseTiles[(int)type];
+
+            else
+                return tilemapBaseTiles[0];
         }
     }
 }
