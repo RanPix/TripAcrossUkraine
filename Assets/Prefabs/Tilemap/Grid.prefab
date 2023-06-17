@@ -2438,8 +2438,8 @@ MonoBehaviour:
   tilemapBaseTiles:
   - {fileID: 11400000, guid: b4fa25ad659afcd49b3316cf138e6b9e, type: 2}
   - {fileID: 11400000, guid: aba24bd5ad729c047bca9b69e5ccec62, type: 2}
-  - {fileID: 11400000, guid: 2c15b52a063166e44ad290738ee63757, type: 2}
   - {fileID: 11400000, guid: 5bdeb092607db724db192d00521cace3, type: 2}
+  - {fileID: 11400000, guid: 83c66584b85bba14b8f6044b5dc36891, type: 2}
   - {fileID: 11400000, guid: 005c2a34d43fba440883b352362d3880, type: 2}
   - {fileID: 11400000, guid: a8b6b21eaaa3f0a44af9cb245d1c9334, type: 2}
   - {fileID: 11400000, guid: b557dbd48d1e63e4ca2de54f2387a77c, type: 2}
