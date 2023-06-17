@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3844736595789654250}
   - component: {fileID: 7919232579555439328}
   - component: {fileID: 7022451042023992007}
+  - component: {fileID: 4695353227962173526}
   m_Layer: 5
   m_Name: Building Panel
   m_TagString: Untagged
@@ -90,3 +91,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 7919232579555439328}
+--- !u!114 &4695353227962173526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3910052292256924424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1fe297dc0446304d8b3a2d8774bb71b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleOnHighlight: 0.93
+  scaleOnHighlightTime: 0.1
