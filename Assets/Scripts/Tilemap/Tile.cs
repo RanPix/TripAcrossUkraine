@@ -106,6 +106,7 @@ namespace TileMap
 
         public void UpdateSurroundings()
         {
+            print(GetComponent<Spawner>());
             GetComponent<Spawner>()?.UpdateSpawnerData();
         }
     }

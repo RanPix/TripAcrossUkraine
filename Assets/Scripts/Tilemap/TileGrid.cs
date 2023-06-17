@@ -140,7 +140,6 @@ namespace TileMap
                 else if (conflictTile.type == TileType.Road)
                     return;
 
-
                 else
                 {
                     Destroy(conflictTile.gameObject);
@@ -154,7 +153,9 @@ namespace TileMap
             foreach (Tile _tile in GetMooreNeighbourTiles(gridSpawnPosition))
             {
                 if (_tile != null)
+                {
                     hasRoads = _tile.type == TileType.Road;
+                }
 
                 if (hasRoads)
                     break;
@@ -166,9 +167,10 @@ namespace TileMap
             Tile tile = Instantiate(tilePrefab, spawnPosition, Quaternion.identity).GetComponent<Tile>();
             tile.SetArgs(spawnTileArgs);
 
-            var surroundingTiles = GetMooreNeighbourTiles(tile);
+            Tile[] surroundingTiles = GetMooreNeighbourTiles(gridSpawnPosition);
             foreach (var _tile in surroundingTiles)
             {
+                print(_tile);
                 _tile?.UpdateSurroundings();
             }
         }
