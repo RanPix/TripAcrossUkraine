@@ -4,7 +4,7 @@ using UnityEngine;
 public class GlobalSpawner : MonoBehaviour
 {
     [SerializeField] private List<GameObject> ItemsToSpawn = new ();
-    void Start()
+    void Awake()
     {
         foreach (var gameObject in ItemsToSpawn)
         {

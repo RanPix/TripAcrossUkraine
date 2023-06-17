@@ -12,6 +12,11 @@ namespace Player
 
         public Action OnDeath;
 
+        private void Start()
+        {
+            CharacterAndUIConnector.instance.ConnectUI(this);
+        }
+
         public void GetDamage(int damage)
         {
             _currentHP -= damage;

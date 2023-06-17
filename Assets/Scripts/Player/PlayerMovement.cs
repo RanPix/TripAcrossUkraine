@@ -11,10 +11,12 @@ public class PlayerMovement : MonoBehaviour
     
     void Start()
     {
-        CharacterAndUIConnector.instance.ConnectUI(this);
         _currentTile = TileGrid.instance.GetFirstRoadTile();
         SetNextTile();
-        Move();
+
+        SetPositionToTile(_currentTile);
+
+        TurnManager.instance.OnNextTurn += Move;
     }
 
     private void Update()
@@ -28,8 +30,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move()
     {
-        _transform.position = new Vector3(_nextTile.Position.x, _nextTile.Position.y, -0.1f);
-        
+        SetPositionToTile(_nextTile);
+
         _previousTile = _currentTile;
         _currentTile = _nextTile;
         SetNextTile();
@@ -37,6 +39,10 @@ public class PlayerMovement : MonoBehaviour
         _currentTile.OnPlayerEnter?.Invoke();
     }
 
+    private void SetPositionToTile(Tile tile)
+    {
+        _transform.position = new Vector3(tile.Position.x, tile.Position.y, -0.1f);
+    }
 
     private Tile SetNextTile()
     {

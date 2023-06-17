@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Player;
 
 public class CharacterAndUIConnector : MonoBehaviour
 {
     public static CharacterAndUIConnector instance;
 
-    [SerializeField] Button nextMoveButton;
+    [SerializeField] private Button nextMoveButton;
 
     public void Awake()
     {
@@ -17,9 +18,10 @@ public class CharacterAndUIConnector : MonoBehaviour
             Destroy(gameObject);
     }
 
-    public void ConnectUI(PlayerMovement movement)
+    public void ConnectUI(Player.Player player)
     {
-        nextMoveButton.onClick.AddListener(movement.Move);
+        nextMoveButton.onClick.AddListener(TurnManager.instance.NextTurn);
+
 
         Destroy(gameObject);
     }

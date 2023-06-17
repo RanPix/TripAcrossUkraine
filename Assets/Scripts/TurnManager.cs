@@ -17,6 +17,6 @@ public class TurnManager : MonoBehaviour
 
     public void NextTurn()
     {
-        OnNextTurn();
+        OnNextTurn?.Invoke();
     }
 }
