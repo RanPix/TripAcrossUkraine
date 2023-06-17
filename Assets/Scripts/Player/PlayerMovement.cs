@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Tile SetNextTile()
     {
-        print(_currentTile.gridPosition);
+        //print(_currentTile.gridPosition);
         Tile[] _tiles = TileGrid.instance.GetNeumannNeighbourTiles(_currentTile);
         foreach (var tile in _tiles)
         {

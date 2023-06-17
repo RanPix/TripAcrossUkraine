@@ -18,7 +18,7 @@ namespace TileMap
         [SerializeField] private Tile[,] tiles;
         [SerializeField] private float tileSize;
         [SerializeField] private Vector2 origin;
-        
+
 
         private void Awake()
         {
@@ -26,7 +26,7 @@ namespace TileMap
                 instance = this;
             else
                 Debug.LogError("TILE GRID INSTANCE ALREADY EXISTS");
-            
+
             tiles = new Tile[gridSize.x, gridSize.y];
         }
 
@@ -52,16 +52,16 @@ namespace TileMap
         {
             List<Tile> neighburs = new();
 
-            if(tile.gridPosition.x > 0) // (-1, 0)
+            if (tile.gridPosition.x > 0) // (-1, 0)
                 neighburs.Add(tiles[tile.gridPosition.x - 1, tile.gridPosition.y]);
 
-            if(tile.gridPosition.x < gridSize.x - 1) // (1, 0)
+            if (tile.gridPosition.x < gridSize.x - 1) // (1, 0)
                 neighburs.Add(tiles[tile.gridPosition.x + 1, tile.gridPosition.y]);
 
-            if(tile.gridPosition.y > 0) // (0, -1)
+            if (tile.gridPosition.y > 0) // (0, -1)
                 neighburs.Add(tiles[tile.gridPosition.x, tile.gridPosition.y - 1]);
 
-            if(tile.gridPosition.y < gridSize.y - 1) // (0, 1)
+            if (tile.gridPosition.y < gridSize.y - 1) // (0, 1)
                 neighburs.Add(tiles[tile.gridPosition.x, tile.gridPosition.y + 1]);
 
             return neighburs.ToArray();
@@ -69,45 +69,49 @@ namespace TileMap
 
         /// <returns> Eight tiles around tile </returns>
         public Tile[] GetMooreNeighbourTiles(Tile tile)
+            => GetMooreNeighbourTiles(tile.gridPosition);
+
+        /// <returns> Eight tiles around tile </returns>
+        public Tile[] GetMooreNeighbourTiles(Vector2Int tile)
         {
             List<Tile> neighburs = new();
 
-            bool isntLeftWall = tile.gridPosition.x > 0;
-            bool isntRightWall = tile.gridPosition.x < gridSize.x - 1;
+            bool isntLeftWall = tile.x > 0;
+            bool isntRightWall = tile.x < gridSize.x - 1;
 
-            bool isntTopWall = tile.gridPosition.y > 0;
-            bool isntBottomWall = tile.gridPosition.y < gridSize.y - 1;
+            bool isntTopWall = tile.y > 0;
+            bool isntBottomWall = tile.y < gridSize.y - 1;
 
             if (isntLeftWall) // (-1, -1) => (-1, 1)
             {
                 if (isntTopWall)
-                    neighburs.Add(tiles[tile.gridPosition.x - 1, tile.gridPosition.y - 1]);
+                    neighburs.Add(tiles[tile.x - 1, tile.y - 1]);
 
-                neighburs.Add(tiles[tile.gridPosition.x - 1, tile.gridPosition.y]);
+                neighburs.Add(tiles[tile.x - 1, tile.y]);
 
                 if (isntBottomWall)
-                    neighburs.Add(tiles[tile.gridPosition.x - 1, tile.gridPosition.y + 1]);
+                    neighburs.Add(tiles[tile.x - 1, tile.y + 1]);
             }
 
             {                  // (0, -1) => (0, 1)
                 if (isntTopWall)
-                    neighburs.Add(tiles[tile.gridPosition.x, tile.gridPosition.y - 1]);
+                    neighburs.Add(tiles[tile.x, tile.y - 1]);
 
-                neighburs.Add(tiles[tile.gridPosition.x, tile.gridPosition.y]);
-
+                neighburs.Add(tiles[tile.x, tile.y]);
+                    
                 if (isntBottomWall)
-                    neighburs.Add(tiles[tile.gridPosition.x, tile.gridPosition.y + 1]);
+                    neighburs.Add(tiles[tile.x, tile.y + 1]);
             }
 
             if (isntRightWall) // (-1, -1) => (-1, 1)
             {
                 if (isntTopWall)
-                    neighburs.Add(tiles[tile.gridPosition.x + 1, tile.gridPosition.y - 1]);
+                    neighburs.Add(tiles[tile.x + 1, tile.y - 1]);
 
-                neighburs.Add(tiles[tile.gridPosition.x + 1, tile.gridPosition.y]);
+                neighburs.Add(tiles[tile.x + 1, tile.y]);
 
                 if (isntBottomWall)
-                    neighburs.Add(tiles[tile.gridPosition.x + 1, tile.gridPosition.y + 1]);
+                    neighburs.Add(tiles[tile.x + 1, tile.y + 1]);
             }
 
 
@@ -138,12 +142,28 @@ namespace TileMap
                 else if (conflictTile.type == TileType.Road)
                     return;
 
+
                 else
                 {
                     Destroy(conflictTile.gameObject);
                     tiles[gridSpawnPosition.x, gridSpawnPosition.y] = null;
                 }
             }
+
+            
+
+            bool hasRoads = false;
+            foreach (Tile tile in GetMooreNeighbourTiles(gridSpawnPosition))
+            {
+                if (tile != null)
+                    hasRoads = tile.type == TileType.Road;
+
+                if (hasRoads)
+                    break;
+            }
+
+            if (!hasRoads)
+                return;
 
             Instantiate(tilePrefab, spawnPosition, Quaternion.identity).GetComponent<Tile>().SetArgs(spawnTileArgs);
         }
