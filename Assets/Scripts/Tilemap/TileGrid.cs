@@ -165,7 +165,14 @@ namespace TileMap
             if (!hasRoads)
                 return;
 
-            Instantiate(tilePrefab, spawnPosition, Quaternion.identity).GetComponent<Tile>().SetArgs(spawnTileArgs);
+            Tile tile = Instantiate(tilePrefab, spawnPosition, Quaternion.identity).GetComponent<Tile>();
+            tile.SetArgs(spawnTileArgs);
+
+            var surroundingTiles = GetMooreNeighbourTiles(tile);
+            foreach (var _tile in surroundingTiles)
+            {
+                _tile.UpdateSurroundings();
+            }
         }
 
         public void AddTile(Tile spawnTile)

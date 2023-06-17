@@ -24,7 +24,7 @@ namespace TileMap
         public InfluenceNeighboursType _influenceNeighboursType;
 
         //[SerializeField] private Structure _structure;
-        [HideInInspector] public Vector2Int gridPosition;
+        public Vector2Int gridPosition;
         [SerializeField] private Player.Player player;
         
         private int damage;
@@ -102,6 +102,11 @@ namespace TileMap
                     }
                     break;
             }
+        }
+
+        public void UpdateSurroundings()
+        {
+            GetComponent<Spawner>()?.UpdateSpawnerData();
         }
     }
 }
