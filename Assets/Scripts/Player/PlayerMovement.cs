@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     
     void Start()
     {
+        CharacterAndUIConnector.instance.ConnectUI(this);
         _currentTile = TileGrid.instance.GetFirstRoadTile();
         SetNextTile();
         Move();
