@@ -15,9 +15,14 @@ namespace Player
         public float lastAttackTime { get; set; }
 
         [SerializeField] private GameObject fighting;
+
+        [SerializeField] private Sprite sprite;
+
         private void Start()
         {
             CharacterAndUIConnector.instance.ConnectUI(this);
+            sprite = GetComponent<SpriteRenderer>().sprite;
+            currentHP = maxHP;
         }
 
 
@@ -38,13 +43,16 @@ namespace Player
         public void Die()
         {
             OnDeath?.Invoke();
+            GameManager.instance.GameOver();
         }
 
-        public void Fight(IDamagable enemy)
+        public void Fight(Enemy enemy)
         {
-            Fighting fightingGO = GameObject.Instantiate(fighting, GameObject.FindWithTag("Canvas").transform).GetComponent<Fighting>();
+            Fighting fightingGO = Instantiate(fighting, GameObject.FindWithTag("Canvas").transform).GetComponent<Fighting>();
             fightingGO.player.damagable = this;
+            fightingGO.player.sprite = sprite;
             fightingGO.enemy.damagable = enemy;
+            fightingGO.enemy.sprite = enemy.GetComponent<Enemy>().sprite;
         }
     }
 }

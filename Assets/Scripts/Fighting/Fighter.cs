@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Fighter : MonoBehaviour
 {
@@ -10,26 +10,31 @@ public class Fighter : MonoBehaviour
 
     [SerializeField] private Vector2 startPosition;
     [SerializeField] private Vector2 enemyPosition;
-    private float attackMove;
+
+    public Sprite sprite;
 
     public IDamagable target;
 
-
-    public void AttackCoroutine()
+    private void Start()
     {
-        AttackMove();
+        startPosition = transform.position;
+        GetComponent<RawImage>().texture = sprite.texture;
+    }
+
+    public void Attack(Vector2 enemyPosition)
+    {
+        this.enemyPosition = enemyPosition;
+
+        StartCoroutine(AttackMove());
+        
+    }
+
+    private IEnumerator AttackMove()
+    {
+        transform.DOMoveX(enemyPosition.x, .09f);
+        yield return new WaitForSeconds(.091f);
+
         target.Damage(damagable.damage);
+        transform.DOMoveX(startPosition.x, .09f);
     }
-
-    private void AttackMove()
-    {
-        transform.DOMoveX(transform.parent.position.x + enemyPosition.x, .12f).SetEase(Ease.InElastic).onComplete = MoveBack;
-        Debug.Log("start pos " + startPosition.ToString());
-        Debug.Log("enemy pos " + enemyPosition.ToString());
-        fighting.playerTurn = !fighting.playerTurn;
-
-    }
-
-    private void MoveBack()
-        => transform.DOMoveX(transform.parent.position.x + startPosition.x, .12f).SetEase(Ease.InElastic);
 }

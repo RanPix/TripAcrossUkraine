@@ -18,6 +18,7 @@ public class Building : MonoBehaviour
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        TileGrid.instance.CreateTile(mousePosition, new TileCreateArgs(TileType.Forest));
+        if (TileGrid.instance)
+            TileGrid.instance.CreateTile(mousePosition, new TileCreateArgs(TileType.Forest));
     }
 }

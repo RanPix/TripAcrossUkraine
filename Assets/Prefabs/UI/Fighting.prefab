@@ -34,9 +34,9 @@ RectTransform:
   m_Father: {fileID: 6396885209345322085}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -150, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 150, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1927619674377286313
@@ -86,8 +86,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42596537cc4ad854a9fe3aac165478f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPosition: {x: -150, y: 0}
-  enemyPosition: {x: 150, y: 0}
+  fighting: {fileID: 0}
+  startPosition: {x: -350, y: 0}
+  enemyPosition: {x: 350, y: 0}
 --- !u!1 &3848935784755511584
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,9 +123,9 @@ RectTransform:
   m_Father: {fileID: 6396885209345322085}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: 0}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -150, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &445400105236805708
@@ -174,8 +175,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42596537cc4ad854a9fe3aac165478f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPosition: {x: 150, y: 0}
-  enemyPosition: {x: -150, y: 0}
+  fighting: {fileID: 0}
+  startPosition: {x: 350, y: 0}
+  enemyPosition: {x: -350, y: 0}
 --- !u!1 &5623061988032886342
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,3 +272,4 @@ MonoBehaviour:
   player: {fileID: 7071369099416686404}
   enemy: {fileID: 6760215051576518142}
   smbDead: 0
+  playerTurn: 1

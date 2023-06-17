@@ -22,7 +22,11 @@ public class CharacterAndUIConnector : MonoBehaviour
     {
         nextMoveButton.onClick.AddListener(TurnManager.instance.NextTurn);
 
-
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        instance = null;
     }
 }

@@ -17,6 +17,14 @@ public class TurnManager : MonoBehaviour
 
     public void NextTurn()
     {
+        if (GameManager.instance.gameIsOver)
+            return;
+
         OnNextTurn?.Invoke();
+    }
+
+    private void OnDestroy()
+    {
+        instance = null;
     }
 }

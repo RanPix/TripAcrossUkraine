@@ -223,5 +223,10 @@ namespace TileMap
             else
                 return tilemapBaseTiles[0];
         }
+
+        private void OnDestroy()
+        {
+            instance = null;
+        }
     }
 }

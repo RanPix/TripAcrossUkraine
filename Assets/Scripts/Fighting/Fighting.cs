@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Fighting : MonoBehaviour
@@ -9,10 +7,8 @@ public class Fighting : MonoBehaviour
     public Fighter enemy;
 
     public bool smbDead;
-    public bool playerTurn = true;
-    
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         player.fighting = this;
         enemy.fighting = this;
@@ -20,21 +16,32 @@ public class Fighting : MonoBehaviour
         enemy.target = player.damagable;    
         player.damagable.OnDeath += () => smbDead = true;
         enemy.damagable.OnDeath += () => smbDead = true;
+
+        Shot();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        StartCoroutine(Shot());
-        if(smbDead)
-            Destroy(this);
+        if (smbDead)
+            Destroy(gameObject);
     }
 
-    private IEnumerator Shot()
+    private async void Shot()
     {
-        player.AttackCoroutine();
-        yield return new WaitForSeconds(.25f);
-        enemy.AttackCoroutine();
-        yield return new WaitForSeconds(.25f);
+        while (player.damagable.currentHP > 0 && enemy.damagable.currentHP > 0)
+        {
+            player.Attack(enemy.gameObject.transform.position);
+            await Task.Delay(600);
+
+            if (smbDead)
+                return;
+
+
+            enemy.Attack(player.gameObject.transform.position);
+            await Task.Delay(600);
+
+            if (smbDead)
+                return;
+        }
     }   
 }
