@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class Player : MonoBehaviour
+    public class Player : MonoBehaviour, IDamagable
     {
         [SerializeField] private int money;
         
@@ -17,7 +17,7 @@ namespace Player
             CharacterAndUIConnector.instance.ConnectUI(this);
         }
 
-        public void GetDamage(int damage)
+        public void Damage(int damage)
         {
             _currentHP -= damage;
             if (_currentHP <= 0)

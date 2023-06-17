@@ -64,7 +64,7 @@ namespace TileMap
 
         public void GiveDamageToPlayer()
         {
-            player.GetDamage(damage);
+            player.Damage(damage);
         }
         public void GiveHealToPlayer()
         {
@@ -106,7 +106,6 @@ namespace TileMap
 
         public void UpdateSurroundings()
         {
-            print(GetComponent<Spawner>());
             GetComponent<Spawner>()?.UpdateSpawnerData();
         }
     }
