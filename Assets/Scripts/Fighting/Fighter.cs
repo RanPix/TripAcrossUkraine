@@ -9,16 +9,25 @@ public class Fighter : MonoBehaviour
 
     [SerializeField] private Vector2 startPosition;
     [SerializeField] private Vector2 enemyPosition;
+    private float attackMove;
 
     public IDamagable target;
 
 
     public IEnumerator AttackCoroutine()
     {
-        transform.DOLocalMoveX(enemyPosition.x, 2);
+        AttackMove();
         yield return new WaitForSeconds(2);
         target.Damage(damagable.damage);
-        transform.DOLocalMoveX(startPosition.x, 2);
-        yield return new WaitForSeconds(2);
     }
+
+    private void AttackMove()
+    {
+        transform.DOMoveX(transform.parent.position.x + enemyPosition.x, 1).SetEase(Ease.InElastic).onComplete = MoveBack;
+        Debug.Log("start pos " + startPosition.ToString());
+        Debug.Log("enemy pos " + enemyPosition.ToString());
+    }
+
+    private void MoveBack()
+        => transform.DOMoveX(transform.parent.position.x + startPosition.x, 1).SetEase(Ease.InElastic);
 }
