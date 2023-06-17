@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void Move()
+    public void Move()
     {
         _transform.position = new Vector3(_nextTile.Position.x, _nextTile.Position.y, -0.1f);
         
