@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     {
         SetPositionToTile(_nextTile);
 
+
+
         _previousTile = _currentTile;
         _currentTile = _nextTile;
         SetNextTile();
@@ -40,9 +42,12 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void SetPositionToTile(Tile tile)
+
     {
         _transform.position = new Vector3(tile.Position.x, tile.Position.y, -0.1f);
+
     }
+
 
     private Tile SetNextTile()
     {
